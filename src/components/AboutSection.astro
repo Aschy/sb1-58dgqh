@@ -1,0 +1,35 @@
+---
+import { aboutContent, missionVision } from '../content/about';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+---
+
+<section id="about" class="scroll-section bg-gray-50">
+  <div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+        <div class="p-6">
+          <h2 class="text-3xl font-bold mb-4">{aboutContent.title[lang]}</h2>
+          <p class="text-gray-600 mb-6 leading-relaxed">{aboutContent.content[lang]}</p>
+          
+          <div class="mt-6">
+            <h3 class="text-xl font-semibold mb-3">
+              {lang === 'fr' ? 'Notre Présence Internationale' : 'Our International Presence'}
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {aboutContent.locations[lang].map(location => (
+                <div class="bg-gray-50 p-3 rounded-lg text-center">
+                  <span class="text-gray-700">{location}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

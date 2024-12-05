@@ -1,0 +1,48 @@
+---
+import LanguageSwitch from './LanguageSwitch.astro';
+import Logo from './Logo.astro';
+import { translations } from '../i18n/translations';
+
+const lang = Astro.url.searchParams.get('lang') || 'fr';
+const t = translations[lang];
+---
+<header class="bg-gray-900 text-white py-4 sticky top-0 z-50 transition-transform duration-300" id="main-header">
+  <nav class="container mx-auto px-4 flex justify-between items-center">
+    <Logo />
+    <div class="flex items-center space-x-6">
+      <a href="#home" class="hover:text-blue-400">{t.home}</a>
+      <a href="#about" class="hover:text-blue-400">{t.about}</a>
+      <a href="#services" class="hover:text-blue-400">{t.services}</a>
+      <a href="#solutions" class="hover:text-blue-400">{t.solutions}</a>
+      <a href="#resources" class="hover:text-blue-400">{t.resources}</a>
+      <a href="#contact" class="hover:text-blue-400">{t.contact}</a>
+      <LanguageSwitch />
+    </div>
+  </nav>
+</header>
+
+<script>
+  let lastScroll = 0;
+  const header = document.getElementById('main-header');
+
+  window.addEventListener('scroll', () => {
+    if (!header) return;
+    
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+      header.classList.remove('-translate-y-full');
+      return;
+    }
+    
+    if (currentScroll > lastScroll && !header.classList.contains('-translate-y-full')) {
+      // Scrolling down
+      header.classList.add('-translate-y-full');
+    } else if (currentScroll < lastScroll && header.classList.contains('-translate-y-full')) {
+      // Scrolling up
+      header.classList.remove('-translate-y-full');
+    }
+    
+    lastScroll = currentScroll;
+  });
+</script>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  benefits: string[];
+}
+
+const { benefits } = Astro.props;
+---
+
+<div>
+  <h4 class="text-lg font-semibold mb-3">Ce que nous offrons</h4>
+  <ul class="list-disc pl-5 space-y-2">
+    {benefits.map((benefit) => (
+      <li class="text-gray-600">{benefit}</li>
+    ))}
+  </ul>
+</div>

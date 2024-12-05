@@ -1,0 +1,21 @@
+---
+---
+<div id="scroll-progress" class="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden md:block">
+  <div class="h-24 w-1 bg-gray-300 rounded-full">
+    <div id="progress-bar" class="w-full bg-blue-600 rounded-full transition-all duration-200" style="height: 0%"></div>
+  </div>
+</div>
+
+<script>
+  const progressBar = document.getElementById('progress-bar');
+  
+  function updateScrollProgress() {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    if (progressBar) {
+      progressBar.style.height = `${scrolled}%`;
+    }
+  }
+
+  window.addEventListener('scroll', updateScrollProgress);
+</script>

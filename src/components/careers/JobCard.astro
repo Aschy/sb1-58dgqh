@@ -1,0 +1,75 @@
+---
+import JobResponsibilities from './JobResponsibilities.astro';
+import JobRequirements from './JobRequirements.astro';
+import JobCertifications from './JobCertifications.astro';
+import JobBenefits from './JobBenefits.astro';
+
+interface Props {
+  job: {
+    id: string;
+    title: string;
+    location: string;
+    contractType: string;
+    description: string;
+    responsibilities: {
+      title: string;
+      items: string[];
+    }[];
+    technicalRequirements: string[];
+    personalRequirements: string[];
+    certifications: string[];
+    benefits: string[];
+    applicationEmail: string;
+    reference: string;
+  };
+  lang?: string;
+}
+
+const { job, lang = 'fr' } = Astro.props;
+---
+
+<article class="bg-white rounded-lg shadow-lg overflow-hidden">
+  <div class="p-6">
+    <div class="border-b pb-4 mb-4">
+      <h3 class="text-2xl font-bold mb-2">{job.title}</h3>
+      <div class="flex flex-wrap gap-3 text-gray-600 mb-3">
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span>{job.location}</span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span>{job.contractType}</span>
+        </div>
+      </div>
+      <p class="text-gray-600">{job.description}</p>
+    </div>
+
+    <div class="space-y-4">
+      <JobResponsibilities responsibilities={job.responsibilities} />
+      <JobRequirements title="Compétences techniques" items={job.technicalRequirements} />
+      <JobRequirements title="Compétences personnelles" items={job.personalRequirements} />
+      <JobCertifications certifications={job.certifications} />
+      <JobBenefits benefits={job.benefits} />
+
+      <div class="border-t pt-4 mt-4">
+        <h4 class="text-lg font-semibold mb-3">Comment postuler ?</h4>
+        <p class="text-gray-600">
+          Envoyez votre CV et lettre de motivation à{' '}
+          <a href={`mailto:${job.applicationEmail}`} class="text-blue-600 hover:text-blue-800">
+            {job.applicationEmail}
+          </a>
+          {' '}en précisant la référence [{job.reference}].
+        </p>
+        <p class="text-gray-600 mt-3 italic">
+          UNITE99 s'engage pour l'égalité des chances et encourage la diversité au sein de ses équipes.
+        </p>
+      </div>
+    </div>
+  </div>
+</article>

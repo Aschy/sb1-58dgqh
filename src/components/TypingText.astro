@@ -1,0 +1,28 @@
+---
+interface Props {
+  text: string;
+  speed?: number;
+  chunkSize?: number;
+  class?: string;
+}
+
+const { 
+  text, 
+  speed = 10, 
+  chunkSize = 3,
+  class: className = '' 
+} = Astro.props;
+---
+<span 
+  data-typing
+  data-typing-speed={speed}
+  data-chunk-size={chunkSize}
+  class={`inline-block ${className}`}
+>
+  {text}
+</span>
+
+<script>
+  import { initTypingAnimations } from '../utils/animationUtils';
+  document.addEventListener('DOMContentLoaded', initTypingAnimations);
+</script>

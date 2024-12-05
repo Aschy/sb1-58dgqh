@@ -1,0 +1,21 @@
+---
+import JobList from './careers/JobList.astro';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+---
+
+<section id="careers" class="scroll-section bg-gray-50">
+  <div class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-12 text-center">
+        {lang === 'fr' ? 'Carrières' : 'Careers'}
+      </h2>
+
+      <JobList lang={lang} />
+    </div>
+  </div>
+</section>

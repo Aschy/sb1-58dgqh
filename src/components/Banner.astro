@@ -1,0 +1,18 @@
+---
+interface Props {
+  imagePath: string;
+  alt: string;
+}
+
+const { imagePath, alt } = Astro.props;
+---
+<div class="relative w-full max-w-4xl mx-auto mb-8">
+  <img 
+    src={imagePath}
+    alt={alt}
+    class="w-full h-auto rounded-lg shadow-2xl"
+    width="1200"
+    height="630"
+    loading="eager"
+  />
+</div>

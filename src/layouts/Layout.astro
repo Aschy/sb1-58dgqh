@@ -1,0 +1,67 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ScrollProgress from '../components/ScrollProgress.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import '../styles/smoothScroll.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Solutions de cybersécurité leaders pour votre entreprise" } = Astro.props;
+const lang = Astro.url.searchParams.get('lang') || 'fr';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | UNITE99</title>
+  </head>
+  <body class="smooth-scroll-container">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <ScrollProgress />
+    <ScrollToTop />
+  </body>
+</html>
+
+<script>
+  import { observeSections } from '../utils/scrollUtils';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    observeSections();
+  });
+</script>
+
+<style is:global>
+  :root {
+    --accent: 62, 116, 255;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background: #f6f6f6;
+    color: #1a1a1a;
+  }
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+      Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .smooth-scroll-container {
+      scroll-behavior: auto;
+    }
+  }
+</style>

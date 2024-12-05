@@ -1,0 +1,16 @@
+---
+import JobCard from './JobCard.astro';
+import { jobPostings } from '../../content/careers';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+---
+
+<div class="space-y-8">
+  {jobPostings.map((job) => (
+    <JobCard job={job} lang={lang} />
+  ))}
+</div>

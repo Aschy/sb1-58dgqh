@@ -1,0 +1,54 @@
+---
+import { articles } from '../content/articles';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+---
+
+<section id="resources" class="scroll-section bg-gray-50">
+  <div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6 text-center">
+        {lang === 'fr' ? 'Ressources' : 'Resources'}
+      </h2>
+
+      <div class="space-y-6">
+        {articles.map(article => (
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-2xl font-bold">{article.title}</h3>
+                <span class="text-sm text-gray-500">
+                  {new Date(article.date).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US')}
+                </span>
+              </div>
+              
+              <p class="text-gray-600 mb-3">{article.excerpt}</p>
+              
+              <div class="flex flex-wrap gap-2 mb-3">
+                {article.tags.map(tag => (
+                  <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600">{article.author}</span>
+                <a 
+                  href={`/articles/${article.id}`}
+                  class="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  {lang === 'fr' ? 'Lire la suite' : 'Read more'} →
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

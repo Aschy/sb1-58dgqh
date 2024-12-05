@@ -1,0 +1,17 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "h-8" } = Astro.props;
+---
+<div class="flex items-center justify-center">
+  <img 
+    src="/images/unite99-logo.svg" 
+    alt="UNITE99" 
+    class={className}
+    width="200"
+    height="50"
+    loading="eager"
+  />
+</div>
